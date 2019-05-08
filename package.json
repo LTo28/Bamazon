@@ -19,6 +19,7 @@
   "homepage": "https://github.com/LTo28/Node.js-MySQL#readme",
   "dependencies": {
     "dotenv": "^8.0.0",
+    "inquirer": "^6.3.1",
     "mysql2": "^1.6.5"
   }
 }
