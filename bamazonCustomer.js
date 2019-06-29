@@ -13,7 +13,7 @@ const db = createConnection({
   database: process.env.DB_database
 })
 
-async function getList (columns) {
+async function getList(columns) {
   let response = await new Promise((resolve, reject) => {
     db.query(`SELECT ${columns} FROM products`, (e, r) => {
       if (e) {
@@ -26,14 +26,14 @@ async function getList (columns) {
   return response
 }
 
-  //inquirer prompt for action
-  //view all items
-  //add items to shopping cart
-  //view shopping cart
-  //modify shopping cart
-  //remove items
-  //checks available inventory
-  //exit app
+//inquirer prompt for action
+//view all items
+//add items to shopping cart
+//view shopping cart
+//modify shopping cart
+//remove items
+//checks available inventory
+//exit app
 
 const getAction = () => {
   prompt({
@@ -47,7 +47,7 @@ const getAction = () => {
         case 'View Items':
           viewItems()
             .then(r => {
-              console.log(r)
+              //console.log(r)
             })
             .catch(e => console.log(e))
           break
@@ -57,12 +57,12 @@ const getAction = () => {
         case 'EXIT':
           process.exit()
         default:
-        getAction()
-        break
-      }    
+          getAction()
+          break
+      }
     })
     .catch(e => console.log(e))
-  }
+}
 
 async function viewItems() {
   let response = await new Promise((resolve, reject) => {
@@ -70,16 +70,17 @@ async function viewItems() {
       if (e) {
         reject(e)
       } else {
-        resolve(r)
+        r.forEach(data => {
+          console.log(
+            `
+          ID: ${data.item_id}
+          Item: ${data.product_name}
+          Price: $${data.price}
+          Quantity: ${data.stock_quantity}
+          `)
+        })
       }
-      console.log(r)
     })
-  // prompt({
-  //   type: 'list',
-  //   name: 'items',
-  //   message: 'Add what you want to your cart:',
-  //   choices: 
-  // })
   })
   return response
 }
